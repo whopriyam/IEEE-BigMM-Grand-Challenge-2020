@@ -1,0 +1,67 @@
+Class Imbalance:
+Feature​​​				     0-1 Ratio​
+
+Text_Only_Informative   ​​ 0.274-0.826
+
+Image_Only_Informative  ​ 0.6698-0.3302
+
+Directed_Hate		    ​​ 0.9622-0.0378
+
+Generalized_Hate  ​​       0.9718-0.0282
+
+Sarcasm                  ​​0.9789-0.0211
+
+Allegation               ​​0.9466-0.0534
+
+Justification            ​​0.9668-0.0332
+
+Refutation               ​​0.9792-0.0208
+
+Support                  ​​0.6813-0.3187
+
+Oppose                   ​​0.9262-0.0738
+
+Tweet wise pairing of features have a common under-balanced class pair. The number of tweets for each pair:
+
+Directed_Hate  and  Generalized_Hate - 0
+Directed_Hate  and  Sarcasm - 5
+Directed_Hate  and  Allegation - 143
+Directed_Hate  and  Justification - 4
+Directed_Hate  and  Refutation - 7
+Directed_Hate  and  Support - 191
+Directed_Hate  and  Oppose - 32
+Generalized_Hate  and  Sarcasm - 10
+Generalized_Hate  and  Allegation - 9
+Generalized_Hate  and  Justification - 3
+Generalized_Hate  and  Refutation - 0
+Generalized_Hate  and  Support - 96
+Generalized_Hate  and  Oppose - 29
+Sarcasm  and  Allegation - 8
+Sarcasm  and  Justification - 7
+Sarcasm  and  Refutation - 0
+Sarcasm  and  Support - 29
+Sarcasm  and  Oppose - 19
+Allegation  and  Justification - 14
+Allegation  and  Refutation - 4
+Allegation  and  Support - 288
+Allegation  and  Oppose - 10
+Justification  and  Refutation - 3
+Justification  and  Support - 83
+Justification  and  Oppose -41
+Refutation  and  Support - 11
+Refutation  and  Oppose - 83
+Support  and  Oppose - 0
+
+Most common words in underbalanced class of certain feature columns:
+
+Allegation
+[('metoo', 369), ('no2', 69), ('ption', 67), ('woman', 56), ('sexual', 56), ('movement', 54), ('allegation', 34), ('metooindia', 31), ('harassment', 28), ('amp', 25), ('say', 22), ('india', 20), ('support', 20), ('story', 19), ('one', 19), ('accused', 19), ('men', 18), ('assault', 18), ('like', 18), ('victim', 17)]
+
+Justification
+[('metoo', 223), ('woman', 45), ('no2', 38), ('ption', 37), ('movement', 36), ('sexual', 32), ('amp', 25), ('harassment', 23), ('allegation', 19), ('india', 16), ('metooindia', 16), ('one', 14), ('say', 13), ('year', 12), ('men', 12), ('timesup', 12), ('indian', 11), ('read', 11), ('people', 10), ('support', 10), ('u', 10), ('anu', 10), ('malik', 10), ('post', 8), ('like', 8), ('right', 8), ('trump', 8), ('work', 8), ('world', 8), ('question', 8)]
+
+Generalized_Hate
+[('metoo', 184), ('woman', 34), ('sexual', 28), ('movement', 27), ('no2', 23), ('ption', 22), ('metooindia', 22), ('harassment', 19), ('amp', 17), ('say', 13), ('allegation', 13), ('one', 11), ('india', 11), ('men', 10), ('know', 10), ('assault', 9), ('year', 9), ('justice', 8), ('let', 8), ('u', 7), ('people', 7), ('time', 7), ('take', 7), ('support', 7), ('new', 7), ('timesup', 7), ('guy', 6), ('victim', 6), ('charge', 6), ('work', 6)]
+
+Directed_Hate
+[('metoo', 256), ('no2', 51), ('ption', 48), ('movement', 48), ('woman', 39), ('sexual', 37), ('amp', 27), ('harassment', 18), ('allegation', 18), ('say', 18), ('metooindia', 18), ('take', 14), ('read', 13), ('men', 12), ('one', 12), ('india', 12), ('like', 11), ('let', 11), ('year', 11), ('campaign', 11), ('people', 10), ('time', 10), ('support', 10), ('trump', 9), ('talk', 9), ('accused', 9), ('assault', 9), ('abuse', 9), ('come', 8), ('bcci', 8)]
