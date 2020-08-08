@@ -10,4 +10,4 @@
 
 ```cd IEEE-BigMM-Grand-Challenge-2020/models```
 
-In this folder, you will find the models for each feature column in iPython notebooks. You can run the code ther and find out how the model performs.
+In this folder, you will find the models for each feature column in iPython notebooks. You can run the code there and find out how the model performs.
