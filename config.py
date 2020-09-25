@@ -1,0 +1,1 @@
+UPLOAD_FOLDER = "C:\\Users\\sayank\\workspace\\mmbt2\\img"

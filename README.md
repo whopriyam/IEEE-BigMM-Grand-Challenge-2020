@@ -1,15 +1,7 @@
-- Download the source code by running the following command:
+# Multimodal Sentiment Analysis of #MeToo Tweets
 
-```git clone https://github.com/whopriyam/IEEE-BigMM-Grand-Challenge-2020 ```
+### Steps to run:
 
-- Install the packages required by running the following command:
-
-```pip install -r requirements.txt```
-
-- Navigate to the models folder by running:
-
-```cd IEEE-BigMM-Grand-Challenge-2020/code/models```
-
-In this folder, you will find the models for each feature column in iPython notebooks. You can run the code there and find out how the model performs.
-
-The code in the repository belongs to Priyam Basu, Soham Tiwari, Joseph Mohanty and Sayantan Karmakar.
+* Create a folder named pretrained and copy the saved models in it.
+* Specify the path where to save the uploaded images in `config.py`.
+* Run the command `python api.py`.

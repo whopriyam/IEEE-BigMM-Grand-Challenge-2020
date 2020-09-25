@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+    <title>#MeToo MMBT</title>
+</head>
+<body>
+    <div class="container main">
+        <div class="container header">
+            <h1>#MeToo Multimodal Sentiment Analysis</h1>
+        </div>
+        <div class="form-wrap">
+            <form method=post enctype = multipart/form-data id="tweet-form">
+                <textarea name="Tweet" form="tweet-form" id="tweet-box" rows=5 placeholder="What's Happening?"></textarea>
+                <div class="submit-div">
+                    <div>
+                        <input type="file" name="image" id="file" form="tweet-form"/>
+                        <label for="file">+ Image</label>
+                    </div>
+                    <input type="submit" value="Predict" form="tweet-form" id="submit-btn" />
+                </div>
+                <br>
+            </form>
+        </div>
+        <div class="result-wrap">
+            <h1>Analysis</h1>
+            <ul style="list-style-type:none;">
+                <li>Sarcasm: <span class="result">{{sarcasm_prediction}}</span></li>
+                <li>Allegation: <span class="result">{{allegation_prediction}}</span></li>
+                <li>Text_Only_Informative: <span class="result">{{text_only_pred}}</span></li>
+            </ul>
+        </div>
+        <footer>
+            <p>IEEE Grand Challenge 2020</p>
+            <p>Created by Sayantan Karmakar, Joseph Mohanty, Priyam Basu and Soham Tiwari</p>
+        </footer>
+    </div>
+</body>
+</html>
+
