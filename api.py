@@ -24,7 +24,7 @@ import glob
 
 
 app = Flask(__name__)
-UPLOAD_FOLDER = "C:\\Users\\josep\\OneDrive\\Desktop\\Sarcasm\\img_upload"
+UPLOAD_FOLDER = "C:\\Users\\josep\\OneDrive\\Desktop\\MMBT\\img_upload"
 
 bert = BertModel.from_pretrained('bert-base-uncased')
 bert_tokenizer = BertTokenizer.from_pretrained('bert-base-uncased',do_lower_case = True)
@@ -336,6 +336,8 @@ def model_predict(dataloader, model, no_of_classes, store_preds=False):
 
     return preds
 
+model_list = []
+
 @app.route("/",methods = ["GET","POST"])
 
 def upload_predict():
@@ -344,34 +346,87 @@ def upload_predict():
         image_file = request.files["image"]
         txt = request.form["Tweet"]
 
-        if image_file:
+        if image_file or txt:
             image_location = os.path.join(UPLOAD_FOLDER,image_file.filename)
             image_file.save(image_location)
 
-            model.eval()
+            for m in model_list:
+                m.eval()
 
             test_submission_dataset = SubmissionDataSet(txt,img_transformations,bert_tokenizer,vocab)
             test_submission_dataloader = torch.utils.data.DataLoader(test_submission_dataset,batch_size=4,collate_fn=collate_function_for_submission)
-            predictions = model_predict(test_submission_dataloader,model,no_of_classes,1)
+            
+            sarcasm_predictions = model_predict(test_submission_dataloader,model_list[0],no_of_classes,1)
+
+            del model_list[0]
+
+            allegation_predictions = model_predict(test_submission_dataloader,model_list[0],no_of_classes,1)
+
+            del model_list[0]
+
+            justification_predictions = model_predict(test_submission_dataloader,model_list[0],no_of_classes,1)
+
+            del model_list[0]
+
+            text_only_info_preds = model_predict(test_submission_dataloader,model_list[0],no_of_classes,1)
 
             filelist = glob.glob(os.path.join(UPLOAD_FOLDER,"*.jpg"))
             for f in filelist:
                 os.remove(f)
 
-            print(predictions[0])
+            return render_template("index.html",sarcasm_prediction = sarcasm_predictions[0],allegation_prediction = allegation_predictions[0],justification_prediction = justification_predictions[0],text_only_info_pred = text_only_info_preds[0])
 
-            return render_template("index.html",prediction = predictions[0],txt = txt)
-
-    return render_template("index.html",prediction = 1)
-
+    return render_template("index.html")
 
 if __name__ == "__main__":
+
     model = MultiModalBertClf(no_of_classes,bert_tokenizer)
     vocab = Vocab()
+
     try:
 	    model.load_state_dict(torch.load('sarcasm.pth'))
-	    print('Model Loaded Successfully')  
+	    print('Sarcasm Model Loaded Successfully')  
     except:
-	    print('Model load was Unsucessful')
+	    print('Sarcasm Model load was Unsucessful')
 
+    model_list.append(model)
+
+    del model
+    
+    model = MultiModalBertClf(no_of_classes,bert_tokenizer)
+
+    try:
+        model.load_state_dict(torch.load('allegation.pth'))
+        print('Allegation Model loaded Successfully')
+    except:
+        print('Allegation Model load was Unsucessful')
+
+    model_list.append(model)
+
+    del model
+
+    model = MultiModalBertClf(no_of_classes,bert_tokenizer)
+
+    try:
+        model.load_state_dict(torch.load('justification.pth'))
+        print('Justification Model loaded Successfully')
+    except:
+        print('Justification Model load was unsuccessful')
+    
+    model_list.append(model)
+
+    del model
+
+    # model = MultiModalBertClf(no_of_classes,bert_tokenizer)
+
+    # try:
+    #     model.load_state_dict(torch.load('text_only_informative.pth'))
+    #     print('Text_Only_Informative Model loaded Successfully')
+    # except:
+    #     print('Text_Only_Informative Model load was unsuccessful')
+
+    # model_list.append(model)
+
+    # del model
+    
     app.run(port = 12000, debug = True)
